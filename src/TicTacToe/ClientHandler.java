@@ -11,12 +11,13 @@ public class ClientHandler extends Thread {
     final DataOutputStream dataOutputStream;
     final Socket socket;
 
-    public ClientHandler(int id, Server server, Socket s, DataInputStream dis, DataOutputStream dos) {
+    public ClientHandler(int id, Server server, Socket s, DataInputStream dis, DataOutputStream dos) throws IOException {
         this.id = id;
         this.server = server;
         this.socket = s;
         this.dataInputStream = dis;
         this.dataOutputStream = dos;
+        dataOutputStream.writeUTF(String.valueOf(id));
     }
 
     @Override

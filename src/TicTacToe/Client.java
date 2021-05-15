@@ -6,13 +6,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Main extends Application {
+public class Client extends Application {
+    private String id;
     private Pane pane = new Pane();
     public Canvas canvas;
     public GraphicsContext graphicsContext;
@@ -33,7 +35,8 @@ public class Main extends Application {
         DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
         Scanner scanner = new Scanner(System.in);
-
+        id = dataInputStream.readUTF();
+        stage.setTitle("Player " + (Integer.parseInt(id) + 1));
         Thread readMessage = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -43,11 +46,20 @@ public class Main extends Application {
                         // read the message sent to this client
                         String msg = dataInputStream.readUTF();
                         System.out.println(msg);
-                        int id = Integer.parseInt(String.valueOf(msg.charAt(0)));
-                        int x = Integer.parseInt(String.valueOf(msg.charAt(1)));
-                        int y = Integer.parseInt(String.valueOf(msg.charAt(2)));
-                        board[x][y] = id;
-                        render();
+                        if(!msg.equals("0") && !msg.equals("1") && !msg.equals("-1")) {
+                            int id = Integer.parseInt(String.valueOf(msg.charAt(0)));
+                            int x = Integer.parseInt(String.valueOf(msg.charAt(1)));
+                            int y = Integer.parseInt(String.valueOf(msg.charAt(2)));
+                            board[x][y] = id;
+                            render();
+                        }
+                        if(msg.equals("0")){
+                            JOptionPane.showMessageDialog(null, "Player 1 is the winner!");
+                        } else if(msg.equals(("1"))) {
+                            JOptionPane.showMessageDialog(null, "Player 2 is the winner!");
+                        } else if (msg.equals(("-1"))) {
+                            JOptionPane.showMessageDialog(null, "Drawwwww!");
+                        }
                     } catch (IOException e) {
 
                         e.printStackTrace();
