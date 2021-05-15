@@ -9,7 +9,7 @@ public class Asset {
 
     static {
         try {
-            image0 = new Image((new FileInputStream("E:\\Code\\Java\\Test2\\src\\caro_0-01.png")), 200, 200, false, false);
+            image0 = new Image((new FileInputStream("src/TicTacToe/caro_0-01.png")), 200, 200, false, false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -19,7 +19,7 @@ public class Asset {
 
     static {
         try {
-            image1 = new Image((new FileInputStream("E:\\Code\\Java\\Test2\\src\\caro_1-01.png")), 200, 200, false, false);
+            image1 = new Image((new FileInputStream("src/TicTacToe/caro_1-01.png")), 200, 200, false, false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -28,7 +28,7 @@ public class Asset {
 
     static {
         try {
-            image2 = new Image((new FileInputStream("E:\\Code\\Java\\Test2\\src\\caro_2-01.png")), 200, 200, false, false);
+            image2 = new Image((new FileInputStream("src/TicTacToe/caro_2-01.png")), 200, 200, false, false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
